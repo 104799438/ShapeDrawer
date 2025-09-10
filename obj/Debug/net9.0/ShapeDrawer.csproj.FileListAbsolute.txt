@@ -1,0 +1,14 @@
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/bin/Debug/net9.0/ShapeDrawer
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/bin/Debug/net9.0/ShapeDrawer.deps.json
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/bin/Debug/net9.0/ShapeDrawer.runtimeconfig.json
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/bin/Debug/net9.0/ShapeDrawer.dll
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/bin/Debug/net9.0/ShapeDrawer.pdb
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.GeneratedMSBuildEditorConfig.editorconfig
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.AssemblyInfoInputs.cache
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.AssemblyInfo.cs
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.csproj.CoreCompileInputs.cache
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.dll
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/refint/ShapeDrawer.dll
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.pdb
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.genruntimeconfig.cache
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ref/ShapeDrawer.dll
