@@ -16,7 +16,8 @@ namespace ShapeDrawer
         {
             Rectangle,
             Circle,
-            Line
+            Line,
+            pentagon
         }
 
         public static void Main()
@@ -37,6 +38,7 @@ namespace ShapeDrawer
                 if (SplashKit.KeyTyped(KeyCode.RKey)) kindToAdd = ShapeKind.Rectangle;
                 if (SplashKit.KeyTyped(KeyCode.CKey)) kindToAdd = ShapeKind.Circle;
                 if (SplashKit.KeyTyped(KeyCode.LKey)) kindToAdd = ShapeKind.Line;
+                if (SplashKit.KeyTyped(KeyCode.PKey)) kindToAdd = ShapeKind.Pentagon;
 
                 // Left-click → add shape
                 if (SplashKit.MouseClicked(MouseButton.LeftButton))
@@ -67,6 +69,14 @@ namespace ShapeDrawer
                             myDrawing.AddShape(line);
                             i = i + 1;
                         }
+                    }
+                    else if (kindToAdd == ShapeKind.Pentagon)
+                    {
+                        // Center at mouse; radius ~ DEFAULT_SIZE; zero rotation
+                        MyPentagon pent = new MyPentagon(Color.MediumPurple, DEFAULT_SIZE, 0.0f);
+                        pent.X = mx;
+                        pent.Y = my;
+                        myDrawing.AddShape(pent);
                     }
                 }
 

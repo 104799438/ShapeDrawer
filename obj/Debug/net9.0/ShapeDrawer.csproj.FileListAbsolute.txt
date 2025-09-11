@@ -12,3 +12,4 @@
 /Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.pdb
 /Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.genruntimeconfig.cache
 /Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ref/ShapeDrawer.dll
+/Users/renad/Desktop/OOP/Week4/ShapeDrawer/obj/Debug/net9.0/ShapeDrawer.sourcelink.json
