@@ -17,7 +17,7 @@ namespace ShapeDrawer
             Rectangle,
             Circle,
             Line,
-            pentagon
+            Pentagon
         }
 
         public static void Main()
@@ -72,8 +72,7 @@ namespace ShapeDrawer
                     }
                     else if (kindToAdd == ShapeKind.Pentagon)
                     {
-                        // Center at mouse; radius ~ DEFAULT_SIZE; zero rotation
-                        MyPentagon pent = new MyPentagon(Color.MediumPurple, DEFAULT_SIZE, 0.0f);
+                        MyPentagon pent = new MyPentagon(Color.Purple, DEFAULT_SIZE);
                         pent.X = mx;
                         pent.Y = my;
                         myDrawing.AddShape(pent);
