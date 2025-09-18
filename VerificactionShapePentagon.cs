@@ -23,7 +23,7 @@ namespace ShapeDrawer
             _radius = radius;
         }
 
-        // Calculate 5 vertices of a regular pentagon centered at (X,Y)
+        
         private Point2D[] Vertices()
         {
             Point2D[] pts = new Point2D[5];
@@ -31,7 +31,7 @@ namespace ShapeDrawer
             int i = 0;
             while (i < 5)
             {
-                // Start at top (-90°) and step around counter-clockwise
+                
                 double angle = (2.0 * Math.PI * i / 5.0) - (Math.PI / 2.0);
                 float vx = _x + (float)((double)_radius * Math.Cos(angle));
                 float vy = _y + (float)((double)_radius * Math.Sin(angle));
@@ -46,12 +46,12 @@ namespace ShapeDrawer
             return pts;
         }
 
-        // SINGLE Draw() (keep only this one)
+
         public override void Draw()
         {
             Point2D[] v = Vertices();
 
-            // Fill the convex polygon by fanning from the first vertex v[0]
+            
             int i = 1;
             while (i < v.Length - 1)
             {
@@ -62,14 +62,14 @@ namespace ShapeDrawer
                 i = i + 1;
             }
 
-            // Draw selection outline on top so it stays visible
+            
             if (Selected)
             {
                 DrawOutline();
             }
         }
 
-        // You MUST implement this abstract member
+        
         public override void DrawOutline()
         {
             Point2D[] v = Vertices();
@@ -78,13 +78,13 @@ namespace ShapeDrawer
             while (i < v.Length)
             {
                 int j = i + 1;
-                if (j == v.Length) j = 0; // wrap last->first
+                if (j == v.Length) j = 0; 
                 SplashKit.DrawLine(Color.Black, v[i].X, v[i].Y, v[j].X, v[j].Y);
                 i = i + 1;
             }
         }
 
-        // Point-in-polygon (ray casting)
+        
         public override bool IsAt(Point2D pt)
         {
             Point2D[] v = Vertices();
@@ -96,11 +96,11 @@ namespace ShapeDrawer
 
             while (i < n)
             {
-                // test if the scanline at pt.Y crosses the edge (v[j] -> v[i])
+                
                 bool crosses = ((v[i].Y > pt.Y) != (v[j].Y > pt.Y));
                 if (crosses)
                 {
-                    // do math in double to avoid implicit-conversion warnings, then cast once
+                    
                     double xi = (double)v[i].X;
                     double yi = (double)v[i].Y;
                     double xj = (double)v[j].X;
