@@ -1,17 +1,14 @@
-using SplashKitSDK;
+using System;
+using System.IO;
 using System.Collections.Generic;
+using SplashKitSDK;
 
-
-// Entry point (Main)
-// Handles window creation, keyboard/mouse input, and chooses which shape to add.
-// Uses Drawing to manage all shapes. 
 namespace ShapeDrawer
 {
     public class Program
     {
         private const int DEFAULT_SIZE = 60;
 
-        // Enum helps decide which shape to add
         private enum ShapeKind
         {
             Rectangle,
@@ -24,23 +21,48 @@ namespace ShapeDrawer
         {
             Window window = new Window("Shape Drawer", 800, 600);
             Drawing myDrawing = new Drawing();
-
-            ShapeKind kindToAdd = ShapeKind.Circle; // Default shape
-
-            // ID digit requirement: number of parallel lines
+            ShapeKind kindToAdd = ShapeKind.Circle;
             const int PARALLEL_LINES = 8;
+
+
+            string desktop  = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string saveFile = Path.Combine(desktop, "TestDrawing.txt");
 
             do
             {
                 SplashKit.ProcessEvents();
 
-                // Switch active shape type by pressing keys
                 if (SplashKit.KeyTyped(KeyCode.RKey)) kindToAdd = ShapeKind.Rectangle;
                 if (SplashKit.KeyTyped(KeyCode.CKey)) kindToAdd = ShapeKind.Circle;
                 if (SplashKit.KeyTyped(KeyCode.LKey)) kindToAdd = ShapeKind.Line;
                 if (SplashKit.KeyTyped(KeyCode.PKey)) kindToAdd = ShapeKind.Pentagon;
 
-                // Left-click → add shape
+                if (SplashKit.KeyTyped(KeyCode.SKey))
+                {
+                    try
+                    {
+                        myDrawing.Save(saveFile);
+                        Console.WriteLine($"Saved drawing to: {saveFile}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Save failed: {ex.Message}");
+                    }
+                }
+
+                if (SplashKit.KeyTyped(KeyCode.OKey))
+                {
+                    try
+                    {
+                        myDrawing.Load(saveFile);
+                        Console.WriteLine($"Loaded drawing from: {saveFile}");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error loading file: " + ex.Message);
+                    }
+                }
+
                 if (SplashKit.MouseClicked(MouseButton.LeftButton))
                 {
                     float mx = SplashKit.MouseX();
@@ -60,7 +82,6 @@ namespace ShapeDrawer
                     }
                     else if (kindToAdd == ShapeKind.Line)
                     {
-                        // Draw N parallel lines, offset by 10 pixels
                         int i = 0;
                         while (i < PARALLEL_LINES)
                         {
@@ -79,21 +100,18 @@ namespace ShapeDrawer
                     }
                 }
 
-                // Right-click -> select shapes at mouse position
                 if (SplashKit.MouseClicked(MouseButton.RightButton))
                 {
                     Point2D point = SplashKit.MousePosition();
                     myDrawing.SelectShapesAt(point);
                 }
 
-                // Press space -> random background color
                 if (SplashKit.KeyTyped(KeyCode.SpaceKey))
                 {
                     Color random = SplashKit.RandomColor();
                     myDrawing.Background = random;
                 }
 
-                // Delete/backspace -> remove all selected shapes
                 if (SplashKit.KeyTyped(KeyCode.DeleteKey) || SplashKit.KeyTyped(KeyCode.BackspaceKey))
                 {
                     List<Shape> selected = myDrawing.SelectedShapes;
@@ -105,21 +123,22 @@ namespace ShapeDrawer
                     }
                 }
 
-                // Resize selected (+ and - keys)
                 if (SplashKit.KeyTyped(KeyCode.EqualsKey) || SplashKit.KeyTyped(KeyCode.KeypadPlus))
                 {
                     myDrawing.ResizeSelectedShapes(38);
                 }
+
                 if (SplashKit.KeyTyped(KeyCode.MinusKey) || SplashKit.KeyTyped(KeyCode.KeypadMinus))
                 {
                     myDrawing.ResizeSelectedShapes(-38);
                 }
 
-                // Draw all shapes
                 myDrawing.Draw();
                 SplashKit.RefreshScreen();
             }
             while (!window.CloseRequested);
+
+            window.Close();
         }
     }
 }

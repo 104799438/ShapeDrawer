@@ -1,62 +1,45 @@
+using System.IO;           
 using SplashKitSDK;
-// Subclass of Shape.
-// Adds Radius.
-// Overrides Draw, DrawOutline, IsAt, and ResizeBy.
+
 namespace ShapeDrawer
 {
     public class MyCircle : Shape
     {
         private int _radius;
         private const int MIN_RADIUS = 10;
-        private const int ID_LAST_TWO = 38;  
+        private const int ID_LAST_TWO = 38;
 
-        // Radius property
-        public int Radius
-        {
-            get { return _radius; }
-            set { _radius = value; }
-        }
+        public int Radius { get => _radius; set => _radius = value; }
 
-        // Default constructor: creates a blue circle with radius = 50 + ID
-        public MyCircle() : this(Color.Blue, 50 + ID_LAST_TWO)
-        {
-        }
+        public MyCircle() : this(Color.Blue, 50 + ID_LAST_TWO) { }
+        public MyCircle(Color color, int radius) : base(color) { _radius = radius; }
 
-        // Constructor that takes color and radius
-        public MyCircle(Color color, int radius) : base(color)
-        {
-            _radius = radius;
-        }
-
-        // Draw circle (with outline if selected)
         public override void Draw()
         {
-            if (Selected)
-            {
-                DrawOutline();
-            }
+            if (Selected) { DrawOutline(); }
             SplashKit.FillCircle(_color, _x, _y, _radius);
         }
+        public override void DrawOutline() => SplashKit.DrawCircle(Color.Black, _x, _y, _radius + 2);
+        public override bool IsAt(Point2D pt) => SplashKit.PointInCircle(pt, SplashKit.CircleAt(_x, _y, _radius));
 
-        // Outline is a black circle slightly larger than the actual circle
-        public override void DrawOutline()
-        {
-            SplashKit.DrawCircle(Color.Black, _x, _y, _radius + 2);
-        }
-
-        // Checks if a point is inside the circle
-        public override bool IsAt(Point2D pt)
-        {
-            Circle circle = SplashKit.CircleAt(_x, _y, _radius);
-            return SplashKit.PointInCircle(pt, circle);
-        }
-
-        // Resize circle by adjusting radius
         public override void ResizeBy(int delta)
         {
             int newRadius = _radius + delta;
             if (newRadius < MIN_RADIUS) newRadius = MIN_RADIUS;
             _radius = newRadius;
+        }
+
+        public override void SaveTo(StreamWriter writer)
+        {
+            writer.WriteLine("Circle");
+            base.SaveTo(writer);
+            writer.WriteLine(_radius);
+        }
+
+        public override void LoadFrom(StreamReader reader)
+        {
+            base.LoadFrom(reader);
+            _radius = reader.ReadInteger();
         }
     }
 }
